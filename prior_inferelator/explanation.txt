@@ -1,1 +1,0 @@
-#This code is used to obtain the necessary files to run the acutal inferelator network script. 
