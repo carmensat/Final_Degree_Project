@@ -1,13 +1,19 @@
 # Final_Degree_Project
 
-In this repository, you will find all the code, images, and files related to my final degree project:
+In this repository, you will find all the code, images, and files related to my final degree project, which consisted in generating a Gene Regulatory Network fo the Lamina cells in the *Drosophila Melanoagaster*:
 
-*Deciphering the role of Dan and Danr in the identity of Lamina Neurons in the Drosophila Visual System*
+**Deciphering the role of Dan and Danr in the identity of Lamina Neurons in the Drosophila Visual System**
 
 
 Carmen Samedi¹
+
+
 Scientific director: Dr. Asif Bakshi¹, Dr Claude Desplan² 
+
+
 ¹Center for Genomics and Systems Biology (CGSB), New York University Abu Dhabi, PO Box 129188, Abu Dhabi, United Arab Emirates
+
+
 ²Department of Biology, New York University, 100 Washington Place, New York, NY 10003, USA
 
 # Abstract
@@ -37,11 +43,14 @@ All the required files for the execution are :
 - The `.gtf` file containing the gene annotation of the species.  
 - And finally, the prior matrix, previously built from the peaks file.
 
+
 The next folder is the `network_inferelator`; this folder contains the inferelator code in the file named `lamina_inferelator.py`. The code specifies all the fine-tunings the Inferelator needs for proper execution. 
 The other file in this folder is the `run_inferelator.sh`, which does as its name states and helps run the code using shell. 
 
-The `dan_danr.Rmd` is an RMarkdown file, containing the preliminary analysis run on an available CisTopic representing the ATAC-seq. This file was restricted and contained no metadata; we therefore did not pursue further analysis beyond this one. 
 
-The file `viusalisation.py` is the code allowing to visualize the resulting matrix from the inferelator execution. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
+The `dan_danr.Rmd` is an RMarkdown file, containing the preliminary analysis run on an available CisTopic representing the ATAC-seq. This file lacked metadata, restricting its utility; we therefore did not pursue further analysis beyond this one. 
+
+
+The file `viusalisation.py` is the Python script used to visualize the inferred GRN as an interactive network. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
 
 
