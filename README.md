@@ -48,4 +48,6 @@ The `dan_danr.Rmd` is an RMarkdown file, containing the preliminary analysis run
 
 The file `viusalisation.py` is the Python script used to visualize the inferred GRN as an interactive network. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
 
+The file `scrna_seq.r` is an R script that performs single-cell RNA-seq of Drosophila lamina neurons. It includes cell clustering, marker identification, and gene ontology enrichment.
+
 
