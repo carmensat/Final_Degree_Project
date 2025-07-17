@@ -1,9 +1,7 @@
-# Final_Degree_Project
+# **Deciphering the role of Dan and Danr in the identity of Lamina Neurons in the Drosophila Visual System**
 
-In this repository, you will find all the code, images, and files related to my final degree project, which consisted in generating a Gene Regulatory Network fo the Lamina cells in the *Drosophila Melanoagaster*:
 
-**Deciphering the role of Dan and Danr in the identity of Lamina Neurons in the Drosophila Visual System**
-
+In this repository, you will find all the code, images, and files related to my final degree project, which consisted in generating a Gene Regulatory Network for the Lamina cells in the *Drosophila Melanoagaster*
 
 Carmen Samedi¹
 
