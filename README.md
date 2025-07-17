@@ -3,16 +3,6 @@
 
 In this repository, you will find all the code, images, and files related to my final degree project, which consisted in generating a Gene Regulatory Network for the Lamina cells in the *Drosophila Melanoagaster*
 
-Carmen Samedi¹
-
-
-Scientific director: Dr. Asif Bakshi¹, Dr Claude Desplan² 
-
-
-¹Center for Genomics and Systems Biology (CGSB), New York University Abu Dhabi, PO Box 129188, Abu Dhabi, United Arab Emirates
-
-
-²Department of Biology, New York University, 100 Washington Place, New York, NY 10003, USA
 
 # Abstract
 
@@ -20,13 +10,13 @@ Scientific director: Dr. Asif Bakshi¹, Dr Claude Desplan²
 **Motivation:** Dan and Danr play a role in different mechanisms that help orchestrate the neuronal identity in the Drosophila Visual System, and yet their role in the lamina cells remains unclear. 
 
 
-**Results:** We used confocal imaging, scRNA-seq, snATAC-seq, and a gene regulatory network (GRN) inference to investigate their regulatory function in the lamina cells.
+**Results:** We employed confocal imaging, scRNA-seq, snATAC-seq, and a gene regulatory network (GRN) inference analysis to investigate the regulatory function of these genes in the lamina.
 Danr emerged as a top regulator, repressing many targets, including another known Terminal Selector, while Dan showed minimal connectivity, primarily repressing Danr. 
 These findings suggest Danr may act not as a Terminal Selector, but as a key modulator of neuronal maturation and subtype restriction.
 
 
 **Supplementary information:** Supplementary data are available here.
-If you have any questions or troubles while executing, please contact me through carmen.samedi@alum.esci.upf.edu.
+If you have any questions or troubles while executing, don't hesitate to get in touch with me through carmen.samedi@alum.esci.upf.edu.
 
 All single-cell RNA sequencing and single-nucleus ATAC sequencing analysed in this project were obtained from the publicly available Gene Expression Omnibus (GEO) repository, accession numbers [GSE167266](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi) and [GSE163697](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163697), respectively.
 
