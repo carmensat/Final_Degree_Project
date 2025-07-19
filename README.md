@@ -48,6 +48,7 @@ All the required files for the execution are :
 
 The next folder is the `network_inferelator`; this folder contains the inferelator code in the file named `lamina_inferelator.py`. The code specifies all the fine-tunings the Inferelator needs for proper execution. 
 The other file in this folder is the `run_inferelator.sh`, which does as its name states and helps run the code using shell.
+There is also `FlyBaseTFs.txt` which contains  a list of known or candidate Transcription Factors (TFs) from FlyBase, to help the inferelator define the "regulators" better.
 
 
 The folder `results` contains the different HTML files with the interactive network built with the code `visualisation.py`
