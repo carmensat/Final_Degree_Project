@@ -8,16 +8,19 @@ In this repository, you will find all the code, images, and files related to my 
 # Abstract
 
 
-**Motivation:** Dan and Danr play a role in different mechanisms that help orchestrate the neuronal identity in the Drosophila Visual System, and yet their role in the lamina cells remains unclear. 
+**Motivation:** Our single-cell transcriptomics data shows that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe [1]. 
+Yet, our understanding of the role of these genes in brain development remains unclear.  
+We recently analysed published single-cell transcriptomics data and observed expression of Dan/Danr in the lamina neurons of the Drosophila optic lobe.  
+However, whether Dan/Danr orchestrate the neuronal identity in lamina neurons of the Drosophila visual system remains unclear.  
 
 
-**Results:** We employed confocal imaging, scRNA-seq, snATAC-seq, and a gene regulatory network (GRN) inference analysis to investigate the regulatory function of these genes in the lamina.
+**Results:** We used immunofluorescence microscopy to understand the expression of Dan/Danr in lamina neurons. This was followed by single-cell multiome, gene regulatory network (GRN) inference, and Drosophila genetics to investigate the role of Dan/Danr in the neuronal specification of lamina neurons. 
 Danr emerged as a top regulator, repressing many targets, including another known Terminal Selector, while Dan showed minimal connectivity, primarily repressing Danr. 
 These findings suggest Danr may act not as a Terminal Selector, but as a key modulator of neuronal maturation and subtype restriction.
 
 
 **Supplementary information:** Supplementary data are available here.
-If you have any questions or troubles while executing, don't hesitate to get in touch with me through carmen.samedi@alum.esci.upf.edu.
+If you have any questions or issues while executing, please don't hesitate to contact me at carmen.samedi@alum.esci.upf.edu.
 
 All single-cell RNA sequencing and single-nucleus ATAC sequencing analysed in this project were obtained from the publicly available Gene Expression Omnibus (GEO) repository, accession numbers [GSE167266](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE167266) and [GSE163697](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163697), respectively.
 
@@ -30,7 +33,10 @@ For the Network inference, I chose to use the Inferelator 3 (v0.5.6), a robust a
 The following explains each file and folder. 
 
 
-The folder `prior_inferelator` contains the shell file that executes the command to find the Transcription Factor binding motifs with the help of FIMO scanning ±10 kb around each gene in the *Drosophila melanogaster* genome (BDGP6.54.114). 
+The folder `figures`contains a PDF file with all the figures that are in the main manuscript
+
+The folder `prior_inferelator` contains the shell file that executes the command to find the Transcription Factor binding motifs with the help of FIMO scanning ±10 kb around each gene in the *Drosophila melanogaster* genome (BDGP6.54.114) 
+Almost all the necessary files are found in that folder as well. 
 The Inferelator version was Inferelator-Prior v0.2.3, which, in addition to Python dependencies, this package also requires STAR, sra-tools, bedtools, samtools, and fimo. More information regarding the installation and version required at this [link](https://github.com/flatironinstitute/inferelator-prior). 
 All the required files for the execution are :
 - The `.bed` file, which was extracted from the snATAC-seq and contains the peaks from the ATAC-seq.  
@@ -41,14 +47,26 @@ All the required files for the execution are :
 
 
 The next folder is the `network_inferelator`; this folder contains the inferelator code in the file named `lamina_inferelator.py`. The code specifies all the fine-tunings the Inferelator needs for proper execution. 
-The other file in this folder is the `run_inferelator.sh`, which does as its name states and helps run the code using shell. 
+The other file in this folder is the `run_inferelator.sh`, which does as its name states and helps run the code using shell.
+
+
+The folder `results` contains the different HTML files with the interactive network built with the code `visualisation.py`
+
+
+The file `Supplementary_materials.pdf` contains the actual PDF file of the supplementary materials of the main manuscript.
 
 
 The `dan_danr.Rmd` is an RMarkdown file, containing the preliminary analysis run on an available CisTopic representing the ATAC-seq. This file lacked metadata, restricting its utility; we therefore did not pursue further analysis beyond this one. 
 
 
-The file `viusalisation.py` is the Python script used to visualize the inferred GRN as an interactive network. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
+The file `go_enrichment.R` contains the code to perform the GO enrichment analysis for the top 50 genes regulated by Danr 
+
 
 The file `scrna_seq.r` is an R script that performs single-cell RNA-seq of Drosophila lamina neurons. It includes cell clustering, marker identification, and gene ontology enrichment.
+
+
+The file `viusalisation.py` is the Python script used to visualize the inferred GRN as an interactive network. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
+
+
 
 
