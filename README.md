@@ -8,7 +8,7 @@ In this repository, you will find all the code, images, and files related to my 
 # Abstract
 
 
-**Motivation:** Our single-cell transcriptomics data shows that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe [1]. 
+**Motivation:** Our single-cell transcriptomics data shows that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe. 
 Yet, our understanding of the role of these genes in brain development remains unclear.  
 We recently analysed published single-cell transcriptomics data and observed expression of Dan/Danr in the lamina neurons of the Drosophila optic lobe.  
 However, whether Dan/Danr orchestrate the neuronal identity in lamina neurons of the Drosophila visual system remains unclear.  
