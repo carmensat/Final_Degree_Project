@@ -25,7 +25,7 @@ If you have any questions or issues while executing, please don't hesitate to co
 All single-cell RNA sequencing and single-nucleus ATAC sequencing analysed in this project were obtained from the publicly available Gene Expression Omnibus (GEO) repository, accession numbers [GSE167266](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE167266) and [GSE163697](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163697), respectively.
 
 
-# Repository Files
+# Repository Contents
 In the repository, you find many files used for either the execution or preparation of the GRN. You can also find the analysis run on other files, the results, and the files necessary for execution. 
 For the Network inference, I chose to use the Inferelator 3 (v0.5.6), a robust and widely adopted framework for inferring gene regulatory networks from high-dimensional transcriptomic data. It combines prior knowledge of transcription factor binding with gene expression to estimate transcription factor activity (TFA) and predict direct regulatory relationships. This model excels at handling sparse data and supports multiple regression techniques, including Bayesian Best Subset Regression (BBSR), which I used for its accuracy and interpretability. Its modular design also facilitated integration with custom motif-based priors, making it well suited for analyzing single-cell and multiomic datasets like those in this project.
 
