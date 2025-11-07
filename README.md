@@ -41,7 +41,7 @@ The Inferelator version was Inferelator-Prior v0.2.3, which, in addition to Pyth
 All the required files for the execution are :
 - The [`.bed`](prior_inferelator/GSE163697_consensus_peaks_500pb.bed.gz) file, which was extracted from the snATAC-seq and contains the peaks from the ATAC-seq.  
 - The [`.meme`](prior_inferelator/CisBPDrosophilaALL.meme.zip) file, which contains known transcription factor binding motifs of *Drosophila*.  
-- The `.fasta` file containing the actual DNA sequences of the desired species, in this case, *Drosophila melanogaster*.  
+- The [`.fasta`] file containing the actual DNA sequences of the desired species, in this case, *Drosophila melanogaster*.  
 - The [`.gtf`](prior_inferelator/Drosophila_melanogaster.BDGP6.54.114.zip) file containing the gene annotation of the species.  
 - And finally, the prior matrix, previously built from the peaks file.
 
