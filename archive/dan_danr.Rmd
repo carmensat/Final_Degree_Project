@@ -1,0 +1,302 @@
+---
+title: "<font color='#41CBBF'  size='5'>Dan_Danr</font>"
+author: "<font color='#A8A8A8' size='3'>Carmen Samedi</font>"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 6, fig.height = 4, fig.align = "center")
+```
+
+## Library and object loading
+### { .tabset}
+#### Load the libraries
+```{r message=FALSE, warning=FALSE}
+library(arrow)
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(AnnotationHub)
+library(GenomicRanges)
+library(cisTopic)
+library(pheatmap)
+library(Seurat)
+library(Signac)
+library(readxl)
+library(patchwork)
+library(cowplot)
+library(topGO)
+library(org.Dm.eg.db)
+library(AnnotationDbi)
+library(SingleR)
+library(celldex)
+```
+
+#### Load cisTopic object
+```{r }
+cisTopicObj <- readRDS("GSE163697_cisTopicObject_OL.Rds")
+
+selectedModel <- cisTopicObj@selected.model
+
+names(cisTopicObj@cell.data)
+
+cisTopicObj <- runUmap(cisTopicObj, 
+                       target = "cell", 
+                       seed = 123, 
+                       n_neighbors = 30, 
+                       min_dist = 0.3)
+```
+
+## Plotting
+### { .tabset}
+#### UMAP according to accessibility 
+```{r message=FALSE, warning=FALSE}
+p_ncounts <- plotFeatures(cisTopicObj, 
+                          target = "cell", 
+                          method = "Umap", 
+                          colorBy = "nAcc") 
+
+p_ncounts + theme(legend.text = element_text(size=12),
+            legend.title = element_text(size = 14),
+            legend.key.width = unit(1.5, "cm") )
+```
+
+#### UMAP according to number of counts 
+```{r message=FALSE, warning=FALSE}
+p_ncounts <- plotFeatures(cisTopicObj, 
+                          target = "cell", 
+                          method = "Umap", 
+                          colorBy = "nCounts") 
+
+p_ncounts + theme(legend.text = element_text(size=12),
+            legend.title = element_text(size = 14),
+            legend.key.width = unit(1.5, "cm") )
+```
+
+#### UMAP according to the samples
+```{r}
+cisTopicObj@cell.data$sample_id <- sub("\\..*", "", cisTopicObj@cell.names)
+table(cisTopicObj@cell.data$sample_id)
+
+p_samples <- plotFeatures(cisTopicObj,
+                          target = "cell",
+                          method = "Umap",
+                          colorBy = "sample_id")
+
+p_samples + theme(legend.text = element_text(size=12),
+            legend.title = element_text(size = 14),
+            legend.key.width = unit(1.5, "cm") )
+```
+
+## Correlation matrix and a Heatmap 
+```{r }
+topic_mat <- modelMatSelection(cisTopicObj, target = "cell", method = "Probability")
+topic_matrix_t <- t(topic_mat)
+
+cor_matrix_topics <- cor(topic_matrix_t)
+pheatmap(cor_matrix_topics[1:30, 1:30])
+```
+
+## Dan and Danr Analysis 
+### { .tabset}
+#### Dan and Danr coordinates from Flybase.org
+```{r }
+dan_chr <- "chr3R"
+dan_tss <- 25184383
+danr_tss <- 25139800
+window <- 10000
+region_coords <- cisTopicObj@region.names # Associate to region_coords all of the accessible dna
+```
+
+#### Parse and create dataframe for easy usage 
+```{r}
+parse_regions <- function(region_strings) {
+  data.frame(
+    chr = sub(":.*", "", region_strings),
+    start = as.numeric(sub(".*:(\\d+)-.*", "\\1", region_strings)),
+    end = as.numeric(sub(".*-(\\d+)", "\\1", region_strings)),
+    stringsAsFactors = FALSE
+  )
+}
+
+region_df <- parse_regions(region_coords)
+``` 
+
+#### Find regions near dan and danr 
+```{r}
+target_regions <- region_coords[
+  (region_df$chr == dan_chr) &
+    (
+      (region_df$start >= dan_tss - window & region_df$end <= dan_tss + window) |
+        (region_df$start >= danr_tss - window & region_df$end <= danr_tss + window)
+    )
+]
+
+target_regions_gr <- GRanges(
+  seqnames = sub(":.*", "", target_regions),
+  ranges = IRanges(
+    start = as.numeric(sub(".*:(\\d+)-.*", "\\1", target_regions)),
+    end = as.numeric(sub(".*-(\\d+)", "\\1", target_regions))
+  )
+)
+
+regionScores <- modelMatSelection(cisTopicObj, target = "region", method = "Z-score")
+region_names <- colnames(regionScores)
+
+# Convertir a GRanges para comparar overlaps between sets of regions 
+region_gr <- GRanges(
+  seqnames = sub(":.*", "", region_names),
+  ranges = IRanges(
+    start = as.numeric(sub(".*:(\\d+)-.*", "\\1", region_names)),
+    end = as.numeric(sub(".*-(\\d+)", "\\1", region_names))
+  )
+)
+
+``` 
+
+#### Find regions that are near to dan and danr and that are in the model
+```{r}
+hits <- findOverlaps(target_regions_gr, region_gr)
+matched_region_names <- region_names[subjectHits(hits)]
+length(matched_region_names)
+dan_danr_scores <- regionScores[, matched_region_names, drop = FALSE] # z-score to know how strong this region is associated to each topic 
+
+```
+
+## Plot the results 
+### { .tabset}
+#### Box plot of the z-scores of regions near dan and danr
+```{r}
+boxplot(dan_danr_scores, main = "Z-scores of regions near dan/danr", ylab = "Z-score")
+```
+
+#### Box plot of the topics that are active in regions near Dan and danr 
+```{r}
+boxplot(t(dan_danr_scores), las = 2, main = "Active topics in regions near dan/danr", ylab = "Z-score")
+``` 
+
+
+## Find the names of the Topics 
+### { .tabset}
+#### Extract the region names
+```{r}
+regionScores_t <- t(regionScores)
+regionScores_t <- as.data.frame(regionScores_t)
+regionScores_t$region <- rownames(regionScores_t)
+``` 
+
+#### Calculate the z-scores from the valid regions and pick the top indices 
+```{r}
+valid_regions <- intersect(rownames(regionScores_t), matched_region_names)
+subset_scores <- regionScores_t[valid_regions, 1:(ncol(regionScores_t) - 1)]
+topic_means <- colMeans(subset_scores)
+top_topic_indices <- order(topic_means, decreasing = TRUE)[1:5]
+top_topic_names <- names(topic_means)[top_topic_indices]
+print(top_topic_names)
+``` 
+
+## Plotting the topics near our genes of interest 
+### { .tabset}
+#### UMAP of Topic 25
+```{r}
+p25 <- plotFeatures(
+  cisTopicObj,
+  method = "Umap",
+  target = "cell",
+  topic_contr = "Probability",
+  topics = "Topic25"
+)
+``` 
+
+#### UMAP of Topic 32
+```{r}
+p32 <- plotFeatures(
+  cisTopicObj,
+  method = "Umap",
+  target = "cell",
+  topic_contr = "Probability",
+  topics = "Topic32"
+)
+
+``` 
+
+#### UMAP of Topic 67
+```{r}
+p67 <- plotFeatures(
+  cisTopicObj,
+  method = "Umap",
+  target = "cell",
+  topic_contr = "Probability",
+  topics = "Topic67"
+)
+
+``` 
+
+#### UMAP of Topic 116
+```{r}
+p116 <- plotFeatures(
+  cisTopicObj,
+  method = "Umap",
+  target = "cell",
+  topic_contr = "Probability",
+  topics = "Topic116"
+)
+
+
+``` 
+
+#### UMAP of Topic 175
+```{r}
+p175 <- plotFeatures(
+  cisTopicObj,
+  method = "Umap",
+  target = "cell",
+  topic_contr = "Probability",
+  topics = "Topic175"
+)
+
+``` 
+
+
+## Seurat Analysis of the Cistopic
+### { .tabset}
+#### Clusters of the umap 
+```{r message=FALSE, warning=FALSE}
+set.seed(233)
+topic_mat <- modelMatSelection(cisTopicObj, target = "cell", method = "Probability")
+
+seurat_obj <- CreateSeuratObject(counts = topic_mat, assay = "topics")
+seurat_obj <- RunTFIDF(seurat_obj)
+seurat_obj <- FindTopFeatures(seurat_obj, min.cutoff= "q0")
+seurat_obj <- RunSVD(seurat_obj)
+seurat_obj <- RunUMAP(seurat_obj, reduction = "lsi", dims = 2:30, reduction.name = "umap.atac", reduction.key = "atacUMAP_")
+seurat_obj <- FindNeighbors(seurat_obj, reduction = "lsi", dims = 2:30)
+seurat_obj <- FindClusters(seurat_obj, resolution = 0.8)
+DimPlot(seurat_obj, group.by = "seurat_clusters", label = TRUE)
+``` 
+
+#### Topic 32
+```{r}
+FeaturePlot(seurat_obj, features = "Topic32", reduction = "umap.atac", label = T)
+``` 
+
+#### Topic 25
+```{r}
+FeaturePlot(seurat_obj, features = "Topic25", reduction = "umap.atac", label = T)
+``` 
+
+#### Topic 67 
+```{r}
+FeaturePlot(seurat_obj, features = "Topic67", reduction = "umap.atac", label = T)
+``` 
+
+#### Topic 116
+```{r}
+FeaturePlot(seurat_obj, features = "Topic116", reduction = "umap.atac", label = T)
+```
+
+#### Topic 175 
+```{r}
+FeaturePlot(seurat_obj, features = "Topic175", reduction = "umap.atac", label = T)
+``` 
