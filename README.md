@@ -2,13 +2,13 @@
 
 
 
-In this repository, you will find all the code, images, and files related to my final degree project, which consisted in analysisng the gene expression of two specific genes called Dan and Danr in the Lamina cells in the *Drosophila Melanoagaster*
+In this repository, you will find all the code, images, and files related to my final degree project, which consisted of analysisng the gene expression of two specific genes called Dan and Danr in the Lamina cells in the *Drosophila Melanoagaster*
 
 
 # Abstract
 
 
-**Motivation:** Our single-cell transcriptomics data shows that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe. 
+**Motivation:** Our single-cell transcriptomics data show that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe. 
 Yet, our understanding of the role of these genes in brain development remains unclear.  
 We analysed recently published single-cell transcriptomics data and observed expression of Dan/Danr in the lamina neurons of the Drosophila optic lobe.  
 However, whether Dan/Danr orchestrate the neuronal identity in lamina neurons of the Drosophila visual system remains unclear.  
@@ -20,14 +20,14 @@ These findings suggest Danr may act not as a Terminal Selector, but as a key mod
 
 
 **Supplementary information:** Supplementary data are available here.
-If you have any questions or issues while executing, please don't hesitate to contact me at carmen.samedi@alum.esci.upf.edu.
+If you have any questions or issues while executing, please don't hesitate to contact me at cjs9968@nyu.edu
 
 All single-cell RNA sequencing and single-nucleus ATAC sequencing analysed in this project were obtained from the publicly available Gene Expression Omnibus (GEO) repository, accession numbers [GSE167266](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE167266) and [GSE163697](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE163697), respectively.
 
 
 # Repository Contents
 In the repository, you find many files used for either the execution or preparation of the GRN. You can also find the analysis run on other files, the results, and the files necessary for execution. 
-For the Network Inference, I chose to use the Inferelator 3 (v0.5.6), a robust and widely adopted framework for inferring gene regulatory networks from high-dimensional transcriptomic data. It combines prior knowledge of transcription factor binding with gene expression to estimate transcription factor activity (TFA) and predict direct regulatory relationships. This model excels at handling sparse data and supports multiple regression techniques, including Bayesian Best Subset Regression (BBSR), which I used due to its accuracy and interpretability. Its modular design also facilitated integration with custom motif-based priors, making it well suited for analyzing single-cell and multiomic datasets like those in this project.
+For the Network Inference, I chose to use the Inferelator 3 (v0.5.6), a robust and widely adopted framework for inferring gene regulatory networks from high-dimensional transcriptomic data. It combines prior knowledge of transcription factor binding with gene expression to estimate transcription factor activity (TFA) and predict direct regulatory relationships. This model excels at handling sparse data and supports multiple regression techniques, including Bayesian Best Subset Regression (BBSR), which I used due to its accuracy and interpretability. Its modular design also facilitated integration with custom motif-based priors, making it well-suited for analyzing single-cell and multiomic datasets like those in this project.
 
 
 The following explains each file and folder. 
@@ -48,7 +48,7 @@ All the required files for the execution are :
 
 The next folder is the [`network_inferelator`](network_inferelator); this folder contains the inferelator code in the file named [`lamina_inferelator.py`](network_inferelator/lamina_inferelator.py). The code specifies all the fine-tunings the Inferelator needs for proper execution. 
 The other file in this folder is the [`run_inferelator.sh`](network_inferelator/run_inferelator.sh), which does as its name states and helps run the code using shell.
-There is also [`FlyBaseTFs.txt`](network_inferelator/FlyBaseTFs.txt)  which contains  a list of known or candidate Transcription Factors (TFs) from FlyBase, to help the inferelator define the "regulators" better.
+There is also [`FlyBaseTFs.txt`](network_inferelator/FlyBaseTFs.txt), which contains a list of known or candidate Transcription Factors (TFs) from FlyBase, to help the inferelator define the "regulators" better.
 
 
 The folder [`results`](figures) contains the different HTML files with the interactive network built with the code `visualisation.py`
