@@ -51,6 +51,6 @@ The other file in this folder is the [`run_inferelator.sh`](network_inferelator/
 There is also [`FlyBaseTFs.txt`](network_inferelator/FlyBaseTFs.txt), which contains a list of known or candidate Transcription Factors (TFs) from FlyBase, to help the inferelator define the "regulators" better.
 
 
-The folder [`results`](figures) contains the different HTML files with the interactive network built with the code `visualisation.py`
+The folder [`results`](results) contains the different HTML files with the interactive network built with the code `visualisation.py`
 
-Additional files may be found in the folder [`archive`](figures). 
+Additional files may be found in the folder [`archive`](archive). 
