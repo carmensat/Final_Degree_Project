@@ -2,7 +2,7 @@
 
 
 
-In this repository, you will find all the code, images, and files related to my final degree project, which consisted of analysisng the gene expression of two specific genes called Dan and Danr in the Lamina cells in the *Drosophila Melanoagaster*
+In this repository, you will find all the code, images, and files related to my final degree project, which consisted of analyzing the gene expression of two specific genes, Dan and Danr, in the Lamina cells of *Drosophila Melanogaster*. This is an archival research repository; code is not intended for reuse and may require lab-specific data and environment.
 
 
 # Abstract
@@ -10,7 +10,7 @@ In this repository, you will find all the code, images, and files related to my 
 
 **Motivation:** Our single-cell transcriptomics data show that Dan/Danr genes are widely expressed in the neural stem cells and neuronal populations in the Drosophila central brain and optic lobe. 
 Yet, our understanding of the role of these genes in brain development remains unclear.  
-We analysed recently published single-cell transcriptomics data and observed expression of Dan/Danr in the lamina neurons of the Drosophila optic lobe.  
+We analysed recently published single-cell transcriptomic data and observed expression of Dan/Danr in the lamina neurons of the Drosophila optic lobe.  
 However, whether Dan/Danr orchestrate the neuronal identity in lamina neurons of the Drosophila visual system remains unclear.  
 
 
