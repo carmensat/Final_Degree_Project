@@ -53,21 +53,4 @@ There is also [`FlyBaseTFs.txt`](network_inferelator/FlyBaseTFs.txt), which cont
 
 The folder [`results`](figures) contains the different HTML files with the interactive network built with the code `visualisation.py`
 
-
-The file [`Supplementary_materials.pdf`](Supplementary_materials.pdf) contains the actual PDF file of the supplementary materials of the main manuscript.
-
-
-The [`dan_danr.Rmd`](dan_danr.Rmd) is an RMarkdown file, containing the preliminary analysis run on an available CisTopic representing the ATAC-seq. This file lacked metadata, restricting its utility; we therefore did not pursue further analysis beyond this one. 
-
-
-The file [`go_enrichment.R`](go_enrichment.R) contains the code to perform the GO enrichment analysis for the top 50 genes regulated by Danr 
-
-
-The file [`scrna_seq.r`](scrna_seq.R) is an R script that performs single-cell RNA-seq of Drosophila lamina neurons. It includes cell clustering, marker identification, and gene ontology enrichment.
-
-
-The file [`viusalisation.py`](visualisation.py) is the Python script used to visualize the inferred GRN as an interactive network. This code was developed based on scripts generously shared by Giuseppe Saldi, whose guidance was instrumental in its implementation.
-
-
-
-
+Additional files may be found in the folder [`archive`](figures). 
